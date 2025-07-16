@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
@@ -57,13 +58,17 @@ class UsuariosController extends Controller
 
     public function editar(string $id) {
         // $usuario = Usuario::where('id', $id)->first();
-        $usuario = Usuario::find($id);
+        $idDesencriptado = desencriptarURL($id);
+        $usuario = Usuario::find($idDesencriptado);
 
         return view('usuarios.editar', compact('usuario'));
     }
 
     public function actualizar(Request $request, string $id) {
 
+        if (!Auth::check()) {
+            return redirect()->back();
+        }
         // $request->validate();
 
         $usuario = Usuario::find($id);

@@ -5,6 +5,15 @@
 
 <h3>Editar</h3>
 
+@php
+    $id = encriptarURL($usuario->id);
+    $idDesencriptado = desencriptarURL($id);
+@endphp
+
+{{ $id }}
+<br>
+{{ $idDesencriptado }}
+<br>
 <form action="{{ route('usuario.actualizar', $usuario->id) }}" method="POST">
     @csrf
     <!-- Equivalente a -->

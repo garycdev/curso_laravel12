@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
     protected $table = 'usuarios';
     protected $primaryKey = 'id';
@@ -12,8 +13,12 @@ class Usuario extends Model
     protected $fillable = [
         'nombre',
         'username',
-        'password',
         'rol'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token'
     ];
 
     // Relaciones en modelos (se los debo)
